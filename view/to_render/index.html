@@ -1,0 +1,77 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>YSearch</title>
+    <style>
+        .center
+        {
+            margin: auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input id='search' type='text'>
+        <button id='submit' type='submit'>Submit</button>
+    </form>
+    <div id='result' class='center'></div>
+    <script>
+        let search = document.getElementById('search');
+        let submit = document.getElementById('submit');
+        let result = document.getElementById('result');
+
+        submit.addEventListener('click', (e) =>
+        {
+            e.preventDefault();
+
+            fetch
+            (
+                '/',
+                {
+                    method : 'POST',
+                    headers :
+                    {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify
+                    ({
+                        terms : search.value
+                    })
+                }
+            )
+            .then((res) => res.json())
+            .then((res) =>
+            {
+                if(res.length) result.innerHTML = '';
+                res.forEach((video) =>
+                {
+                    let div = document.createElement('div');
+                    div.setAttribute('class', 'video center');
+
+                    let a1 = document.createElement('a');
+                    a1.href = video.link;
+
+                    let img = document.createElement('img');
+                    img.src = video.thumbnail;
+
+                    let a2 = document.createElement('a');
+                    a2.href = video.link;
+
+                    let h2 = document.createElement('h2');
+                    h2.innerText = video.title;
+
+                    a1.appendChild(img);
+                    a2.appendChild(h2);
+                    div.appendChild(a1);
+                    div.appendChild(a2);
+                    result.appendChild(div);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
