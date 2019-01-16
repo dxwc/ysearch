@@ -1,6 +1,5 @@
 let router             = require('express').Router();
 const ytsr             = require('ytsr');
-const fetchCommentPage = require('youtube-comment-api');
 const vd               = require('vid_data');
 var comma              = require('comma-number')
 
@@ -45,16 +44,5 @@ router.get('/', (req, res) =>
 {
     res.render('result');
 });
-
-// const videoId = 'h_tkIpwbsxY'
-
-// fetchCommentPage(videoId)
-//   .then(commentPage => {
-//     console.log(commentPage.comments)
-//     return fetchCommentPage(videoId, commentPage.nextPageToken)
-//   })
-//   .then(commentPage => {
-//     console.log(commentPage.comments)
-//   })
 
 module.exports = router;

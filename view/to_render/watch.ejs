@@ -108,6 +108,19 @@
             border: none;
             color: inherit;
         }
+
+        #comments
+        {
+            display: table;
+            margin: 0 auto;
+            padding: 1%;
+        }
+
+        li
+        {
+            list-style: none;
+            padding: 1%;
+        }
     </style>
 </head>
 <body>
@@ -119,6 +132,7 @@
         <button id='submit' type='submit'>Submit</button>
     </form>
     <main>
+
 <?
     if(locals.id)
     {
@@ -137,7 +151,52 @@
             i.height = window.innerHeight/1.5;
         });
     </script>
+
+    <ul id='comments'></ul>
+    <script>
+        let com = document.getElementById('comments');
+        fetch('/comments?v=<?= id ?>')
+        .then((res) => res.json())
+        .then((res) =>
+        {
+            res.forEach((c) =>
+            {
+                let li_top = document.createElement('li');
+                li_top.innerHTML = `<b title='${c.time}'>${c.author}</b>: ${c.text}`;
+                if(c.replies && c.replies.length)
+                {
+                    let ul = document.createElement('ul');
+                    let li;
+                    c.replies.forEach((r) =>
+                    {
+                        li = document.createElement('li');
+                        li.innerHTML =
+                        `<b title='${r.time}'>${r.author}</b>: ${r.text}`;
+                        ul.appendChild(li);
+                    });
+
+                    li_top.appendChild(ul);
+                }
+
+                com.appendChild(li_top);
+            });
+        })
+        .catch((err) =>
+        {
+            console.error(err);
+        });
+    </script>
 <?
+    }
+
+    if(locals.comments)
+    {
+        comments.forEach((c) =>
+        {
+?>
+
+<?
+        })
     }
 ?>
 
