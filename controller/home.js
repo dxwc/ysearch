@@ -2,6 +2,7 @@ let router             = require('express').Router();
 const ytsr             = require('ytsr');
 const fetchCommentPage = require('youtube-comment-api');
 const vd               = require('vid_data');
+var comma              = require('comma-number')
 
 router.post('/', (req, res) =>
 {
@@ -13,9 +14,10 @@ router.post('/', (req, res) =>
         result.items.forEach((video) =>
         {
             if(video.type === 'video') video.id = vd.get_video_id(video.link);
+            video.views = comma(video.views);
         });
 
-        return res.json(result.items);
+        return res.render('result', { result : result.items });
 
         // .forEach((val) =>
         // {
@@ -41,7 +43,7 @@ router.post('/', (req, res) =>
 
 router.get('/', (req, res) =>
 {
-    res.render('index');
+    res.render('result');
 });
 
 // const videoId = 'h_tkIpwbsxY'

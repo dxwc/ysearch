@@ -5,15 +5,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('./view/public'));
-
-app.engine('html', (filePath, options, callback) =>
-{
-    try        { callback(null, fs.readFileSync(filePath, { encoding : 'UTF-8' })); }
-    catch(err) { callback(err); }
-});
-
+require('ejs').delimiter = '?';
+app.set('view engine', 'ejs');
 app.set('views', './view/to_render/');
-app.set('view engine', 'html');
 
 app.use(require('./controller/'));
 

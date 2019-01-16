@@ -1,0 +1,120 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>YSearch</title>
+    <style>
+        main
+        {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .results
+        {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 1vw;
+        }
+
+        form
+        {
+            display: table;
+            margin: 0 auto;
+            margin-bottom: 0.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .video
+        {
+            width: 23vw;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            padding-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        img
+        {
+            width: 100%;
+        }
+
+        .video *
+        {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .duration
+        {
+            position: absolute;
+            top: 0;
+            right: 0.5vw;
+            color: white;
+            text-shadow: 1px 1px 2px grey;
+        }
+
+        .views
+        {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .title
+        {
+            text-align: center;
+        }
+
+        input
+        {
+            height: 2rem;
+            width: auto;
+        }
+
+        button
+        {
+            height: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <form action='/' method='POST'>
+        <input name='terms' type='text' placeholder='sarch terms'>
+        <button id='submit' type='submit'>Submit</button>
+    </form>
+    <main>
+<?
+    if(locals.result && result.constructor === Array && result.length)
+    {
+?>
+        <div class='results'>
+<?
+        result.forEach((vid) =>
+        {
+            if(vid.type === 'video')
+            {
+?>
+                <span class='video'>
+                    <img src='<?= vid.thumbnail ?>'>
+                    <b class='title'><?= vid.title ?></b>
+                    <span class='views'><?= vid.views ?></span>
+                    <span class='duration'><?= vid.duration ?></span>
+                </span>
+
+<?
+            }
+        });
+?>
+        </div>
+<?
+    }
+?>
+
+    </main>
+</body>
+</html>

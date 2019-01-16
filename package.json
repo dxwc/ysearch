@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "comma-number": "^2.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "vid_data": "^0.3.0",
     "youtube-comment-api": "^3.0.2",
