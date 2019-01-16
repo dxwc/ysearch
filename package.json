@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "express": "^4.16.4",
+    "vid_data": "^0.3.0",
+    "youtube-comment-api": "^3.0.2",
     "ytsr": "^0.1.8"
   }
 }

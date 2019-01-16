@@ -49,11 +49,14 @@
                 if(res.length) result.innerHTML = '';
                 res.forEach((video) =>
                 {
+                    if(video.type !== 'video') return;
                     let div = document.createElement('div');
                     div.setAttribute('class', 'video center');
 
                     let a1 = document.createElement('a');
-                    a1.href = video.link;
+                    a1.href =
+                        'https://www.youtube.com/embed/' + video.id +
+                        '?rel=0&autoplay=1'
 
                     let img = document.createElement('img');
                     img.src = video.thumbnail;
