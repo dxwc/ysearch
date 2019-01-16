@@ -109,11 +109,12 @@
             color: inherit;
         }
 
-        #comments
+        #comments, #meta
         {
             display: table;
             margin: 0 auto;
-            padding: 1%;
+            padding-left: 1%;
+            padding-right: 1%;
         }
 
         li
@@ -122,10 +123,17 @@
             padding: 1%;
         }
 
-        .hide
+        .hide, #meta *
         {
             color: grey;
             text-align: center;
+        }
+
+        #up, #down
+        {
+            /* background: white; */
+            padding: 1%;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -157,10 +165,48 @@
             i.height = window.innerHeight/1.5;
         });
     </script>
+    <i class='hide'>
+        <a href='https://www.youtube.com/watch?v=<?= id ?>'>Direct Link</a>
+    </i>
 
-    <h2 class='hide'>
-        <a href='https://www.youtube.com/watch?v=<?= id?>'>Direct Link</a>
-    </h2>
+    <div id='meta' style='display: none'>
+        <p id='views'></p>
+        <div id='rating'>
+            <span id='up'>👍</span>
+            <span id='down'>👎</span>
+        </div>
+        <p id='pub'></p>
+        <p id='desc'></p>
+        <p id='paid'></p>
+    </div>
+    <script>
+        let meta = document.getElementById('meta');
+        let desc = document.getElementById('desc');
+        let views = document.getElementById('views');
+        let paid = document.getElementById('paid');
+        let pub = document.getElementById('pub');
+        let rating = document.getElementById('rating');
+        let up = document.getElementById('up');
+        let down = document.getElementById('down');
+
+        fetch('/vid_info/?id=<?= id ?>')
+        .then((res) => res.json())
+        .then((res) =>
+        {
+            desc.innerHTML = res.description;
+            views.innerHTML = res.views + ' views'
+            paid.innerHTML = res.paid ? 'Paid' : '';
+            pub.innerHTML = 'Published: ' + res.datePublished;
+            up.innerHTML += ' ' + res.likeCount;
+            down.innerHTML += ' ' + res.dislikeCount;
+            meta.removeAttribute('style');
+            console.log(res);
+        })
+        .catch((err) =>
+        {
+            console.error(err);
+        });
+    </script>
 
     <ul id='comments'></ul>
     <script>
@@ -197,16 +243,6 @@
         });
     </script>
 <?
-    }
-
-    if(locals.comments)
-    {
-        comments.forEach((c) =>
-        {
-?>
-
-<?
-        })
     }
 ?>
 
