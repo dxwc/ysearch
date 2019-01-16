@@ -120,32 +120,23 @@
     </form>
     <main>
 <?
-    if(locals.result && result.constructor === Array && result.length)
+    if(locals.id)
     {
 ?>
-        <div class='results'>
-<?
-        result.forEach((vid) =>
+    <iframe
+        src="https://www.youtube.com/embed/<?= id ?>?autoplay=1&rel=0"
+        frameborder="0"
+        allowfullscreen></iframe>
+    <script>
+        let i = document.getElementsByTagName('iframe')[0];
+        i.width = window.innerWidth;
+        i.height = window.innerHeight/1.5;
+        window.addEventListener('resize', () =>
         {
-            if(vid.type === 'video')
-            {
-?>
-                <span class='video'>
-                    <a href='/watch?v=<?= vid.id ?>'>
-                    <img src='https://img.youtube.com/vi/<?= vid.id ?>/mqdefault.jpg'>
-                    </a>
-                    <a href='/watch?v=<?= vid.id ?>'>
-                    <b class='title'><?= vid.title ?></b>
-                    </a>
-                    <span class='views'><?= vid.views ?></span>
-                    <span class='duration'><?= vid.duration ?></span>
-                </span>
-
-<?
-            }
+            i.width = window.innerWidth;
+            i.height = window.innerHeight/1.5;
         });
-?>
-        </div>
+    </script>
 <?
     }
 ?>
