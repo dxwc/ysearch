@@ -5,6 +5,33 @@
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <title>YSearch</title>
     <style>
+        html, body
+        {
+            background-color: #F6F9FC;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: black;
+        }
+
+        input, button
+        {
+            height: calc(1rem + 1vw);
+            text-align: center;
+            margin: 0;
+        }
+
+        input
+        {
+            width: 100%;
+            margin: 0;
+        }
+
+        button
+        {
+            display: none;
+        }
+
         main
         {
             display: table;
@@ -22,8 +49,10 @@
         {
             display: table;
             margin: 0 auto;
-            margin-bottom: 0.2rem;
-            margin-top: 0.2rem;
+            margin-bottom: 0.5%;
+            width: 100vw;
+            max-width: 100vw;
+            overflow: hidden;
         }
 
         .video
@@ -32,8 +61,10 @@
             margin: 0;
             padding: 0;
             position: relative;
-            padding-bottom: 1.5rem;
+            padding-bottom: 1rem;
             overflow: hidden;
+            border-radius: 1.5%;
+            background: white;
         }
 
         img
@@ -70,21 +101,19 @@
             text-align: center;
         }
 
-        input
+        a
         {
-            height: 2rem;
-            width: auto;
-        }
-
-        button
-        {
-            height: 2rem;
+            text-decoration: none;
+            border: none;
         }
     </style>
 </head>
 <body>
     <form action='/' method='POST'>
-        <input name='terms' type='text' placeholder='sarch terms'>
+        <input
+            name='terms'
+            type='text'
+            placeholder='Enter serch terms and press enter'>
         <button id='submit' type='submit'>Submit</button>
     </form>
     <main>
@@ -100,7 +129,7 @@
             {
 ?>
                 <span class='video'>
-                    <img src='<?= vid.thumbnail ?>'>
+                    <img src='https://img.youtube.com/vi/<?= vid.id ?>/mqdefault.jpg'>
                     <b class='title'><?= vid.title ?></b>
                     <span class='views'><?= vid.views ?></span>
                     <span class='duration'><?= vid.duration ?></span>
