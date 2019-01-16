@@ -3,7 +3,7 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <title>YSearch</title>
+    <title><?= locals.terms ? terms : `YSearch` ?></title>
     <style>
         html, body
         {
@@ -115,7 +115,8 @@
         <input
             name='terms'
             type='text'
-            placeholder='Enter serch terms and press enter'>
+            placeholder='Enter serch terms and press enter'
+            value='<?= locals.terms ? terms : `` ?>'>
         <button id='submit' type='submit'>Submit</button>
     </form>
     <main>

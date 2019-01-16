@@ -1,7 +1,7 @@
-let router             = require('express').Router();
-const ytsr             = require('ytsr');
-const vd               = require('vid_data');
-var comma              = require('comma-number')
+let router = require('express').Router();
+const ytsr = require('ytsr');
+const vd   = require('vid_data');
+var comma  = require('comma-number')
 
 router.post('/', (req, res) =>
 {
@@ -16,7 +16,8 @@ router.post('/', (req, res) =>
             video.views = comma(video.views);
         });
 
-        return res.render('result', { result : result.items });
+        return res.render
+        ('result', { result : result.items, terms : req.body.terms });
 
         // .forEach((val) =>
         // {
