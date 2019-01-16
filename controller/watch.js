@@ -1,9 +1,4 @@
-let router             = require('express').Router();
-const ytsr             = require('ytsr');
-const vd               = require('vid_data');
-var comma              = require('comma-number')
-const get_comment = require('youtube-comment-api');
-
+let router = require('express').Router();
 
 router.get('/watch', (req, res) =>
 {
