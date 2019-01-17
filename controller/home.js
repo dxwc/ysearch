@@ -5,7 +5,7 @@ var comma  = require('comma-number')
 
 router.post('/', (req, res) =>
 {
-    if(!req.body.terms.trim().length) res.status(400).send();
+    if(!req.body.terms.trim().length) return res.render('result');
 
     ytsr(req.body.terms, { limit : 20 })
     .then((result) =>
@@ -18,26 +18,11 @@ router.post('/', (req, res) =>
 
         return res.render
         ('result', { result : result.items, terms : req.body.terms });
-
-        // .forEach((val) =>
-        // {
-        //     if(val.type === 'video')
-        //     {
-        //         console.log(val.title);
-        //         console.log(val.link);
-        //         console.log(val.author.name);
-        //         console.log(val.author.ref);
-        //         console.log(val.thumbnail);
-        //         console.log(val.description);
-        //         console.log(val.views);
-        //         console.log(val.duration);
-        //         console.log(val.uploaded_at);
-        //     }
-        // });
     })
     .catch((err) =>
     {
-        throw err;
+        console.error(err);
+        return res.render('result');
     });
 });
 
